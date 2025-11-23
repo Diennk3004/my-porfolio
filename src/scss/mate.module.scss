@@ -1,18 +1,102 @@
+.introduce {
+  li {
+    position: relative;
+    padding: 7px 40px;
+    color: white;
+    &::before {
+      background-image: url("../images/icon-check.png");
+      background-repeat: no-repeat;
+      background-position-y: center;
+      content: " ";
+      width: 1rem;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+}
 .productItem {
   transform: translateY(0);
-  transition: transform 0.3s;
-  animation-name: fadeInUp;
-  animation-duration: 4s;
-  animation-delay: 4s;
+  transition: transform 500ms;
+  transition-timing-function: ease-in;
   &:hover {
     transform: translateY(-10px);
   }
 }
-@keyframes fadeInUp {
+.productOnScroll {
+  animation: myProductFadeUp;
+  animation-duration: 1s;
+  animation-timing-function: ease-in;
+}
+@keyframes myProductFadeUp {
   from {
-    transform: translateY(100px);
+    transform: translateY(40px);
+    visibility: hidden;
+    opacity: 0;
   }
   to {
     transform: translateY(0);
+    visibility: visible;
+    opacity: 1;
+  }
+}
+.labelOnScroll {
+  animation: myLabelFadeUp;
+  animation-duration: 1s;
+  animation-timing-function: ease-in;
+}
+@keyframes myLabelFadeUp {
+  from {
+    transform: translateY(20px);
+    visibility: hidden;
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    visibility: visible;
+    opacity: 1;
+  }
+}
+.ulOnScroll {
+  animation: myUlFadeUp;
+  animation-duration: 2s;
+  animation-timing-function: ease-in;
+}
+@keyframes myUlFadeUp {
+  from {
+    transform: translateY(40px);
+    visibility: hidden;
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    visibility: visible;
+    opacity: 1;
+  }
+}
+.bannerOnScroll {
+  animation: myBannerFadeUp;
+  animation-duration: 1s;
+  animation-timing-function: ease-in;
+}
+@keyframes myBannerFadeUp {
+  from {
+    transform: translateY(60px);
+    visibility: hidden;
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    visibility: visible;
+    opacity: 1;
+  }
+}
+.menuMobile {
+  ul {
+    li {
+      padding: 10px 10px;
+      border-bottom: 1px solid white;
+    }
   }
 }
