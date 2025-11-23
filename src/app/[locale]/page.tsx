@@ -12,6 +12,7 @@ const Home = () => {
   const ulRef = React.useRef<HTMLUListElement>(null);
   const bannerRef = React.useRef<HTMLDivElement>(null);
   const headerRef = React.useRef<HTMLDivElement>(null);
+  const menuMobileRef = React.useRef<HTMLDivElement>(null);
   const [isOpenMenuMobile, setOpenMenuMobile] = React.useState<boolean>(false);
   React.useEffect(() => {
     let offsetView: number = window.scrollY + window.innerHeight;
@@ -64,25 +65,25 @@ const Home = () => {
         }
       }
       if (headerRef && headerRef.current) {
-        let headerChildren = headerRef.current.children;
-        let headerNode: HTMLElement | null = null;
-        let headerNodeWidth: number = 0;
-        if (window.scrollY > headerRef.current.clientHeight) {
-          headerNode = headerChildren.item(0) as HTMLElement | null;
-          if (headerNode) {
-            headerNodeWidth = headerNode.clientWidth;
-            headerNode.classList.remove("pt-10", "pb-10");
-            headerNode.classList.add("bg-linear-to-r", "from-sky-900", "to-sky-400", "shadow-2xl", "border-b", "border-sky-400", "pt-5", "pb-5");
-            headerNode.style.width = `${headerNodeWidth}px`;
-          }
-          headerRef.current.classList.add("fixed", "z-9000");
-        } else {
-          headerRef.current.classList.remove("fixed", "z-9000");
-          headerNode = headerChildren.item(0) as HTMLElement | null;
-          if (headerNode) {
-            headerNode.classList.remove("bg-linear-to-r", "from-sky-900", "to-sky-400", "shadow-2xl", "border-b", "border-sky-400", "pt-5", "pb-5");
-            headerNode.style.width = "100%";
-            headerNode.classList.add("pt-10", "pb-10");
+        if (headerRef.current.children) {
+          let headerChild: HTMLElement | null = headerRef.current.children.item(0) as HTMLElement | null;
+          let headerChildWidth: number = 0;
+          if (window.scrollY > headerRef.current.clientHeight) {
+            if (headerChild) {
+              headerChildWidth = headerChild.clientWidth;
+              headerChild.classList.remove("pt-10", "pb-10");
+              headerChild.classList.add("bg-linear-to-r", "from-sky-900", "to-sky-400", "shadow-2xl", "border-b", "border-sky-400", "pt-5", "pb-5");
+              headerChild.style.width = `${headerChildWidth}px`;
+            }
+            headerRef.current.classList.add("fixed", "w-full", "z-9000", "flex", "justify-center", "left-0", "top-0");
+          } else {
+            headerRef.current.classList.remove("fixed", "w-full", "z-9000", "flex", "justify-center", "left-0", "top-0");
+            if (headerChild) {
+              headerChildWidth = headerChild.clientWidth;
+              headerChild.classList.remove("bg-linear-to-r", "from-sky-900", "to-sky-400", "shadow-2xl", "border-b", "border-sky-400", "pt-5", "pb-5");
+              headerChild.classList.add("pt-10", "pb-10");
+              headerChild.style.width = "100%";
+            }
           }
         }
       }
@@ -94,18 +95,25 @@ const Home = () => {
   }, []);
   const handleOpenMenuMobile = () => {
     setOpenMenuMobile(!isOpenMenuMobile);
+    if (menuMobileRef && menuMobileRef.current) {
+      if (isOpenMenuMobile) {
+        menuMobileRef.current.classList.remove(styles.active);
+      } else {
+        menuMobileRef.current.classList.add(styles.active);
+      }
+    }
   };
   return (
     <React.Fragment>
       <header className={clsx(["h-screen", "bg-linear-to-br", "from-sky-900", "to-sky-400"])}>
-        <div className={clsx(["flex", "justify-center", "w-full", "left-0", "top-0"])} ref={headerRef}>
-          <div className={clsx(["w-full", "flex", "gap-x-50", "pt-10", "pb-10", "pl-20", "pr-20"])}>
-            <div className={clsx(["w-31", "max-lg:w-full", "max-lg:flex", "max-lg:justify-center"])}>
+        <div ref={headerRef}>
+          <div className={clsx(["flex", "gap-x-50", "pt-10", "pb-10", "pl-20", "pr-20"])}>
+            <div className={clsx(["w-31", "max-md:w-full", "max-md:flex", "max-md:justify-center"])}>
               <Link href={{ pathname: "/" }}>
                 <Image src="/logo.png" alt="My website" width={123} height={24} className={clsx(["w-full", "h-full"])} />
               </Link>
             </div>
-            <ul className={clsx(["flex", "max-lg:hidden", "items-center", "gap-x-5", "text-xs", "text-white", "font-bold"])}>
+            <ul className={clsx(["flex", "max-md:hidden", "items-center", "gap-x-5", "text-xs", "text-white", "font-bold"])}>
               <li>
                 <Link href={{ pathname: "/" }} className={clsx(["hover:text-sky-400"])}>
                   Demos
@@ -144,8 +152,8 @@ const Home = () => {
             </ul>
           </div>
         </div>
-        <div className={clsx(["w-full", "pl-20", "pr-20", "ml-auto", "mr-auto", "mt-20", "flex"])}>
-          <div className={clsx(["w-80"])}>
+        <div className={clsx(["w-full", "pl-20", "pr-20", "mt-20", "flex", "max-md:block"])}>
+          <div className={clsx(["w-80", "max-md:w-full"])}>
             <div ref={labelRef}>
               <div className={clsx(["text-white", "font-bold", "text-2xl"])}>The Multipurpose</div>
               <div className={clsx(["text-white", "font-bold", "text-2xl"])}>Premium Shopify Theme</div>
@@ -159,49 +167,55 @@ const Home = () => {
               <li>Premium Support</li>
             </ul>
           </div>
-          <div className={clsx(["grow", "flex", "justify-end"])} ref={bannerRef}>
-            <Image src="/slide1-2.png" alt="Website" width={864} height={644} className={clsx(["h-130", "w-auto"])} />
+          <div className={clsx(["grow", "flex", "justify-end", "max-md:justify-center"])} ref={bannerRef}>
+            <Image src="/slide1-2.png" alt="Website" width={864} height={644} />
           </div>
         </div>
       </header>
-      <div className={clsx(["hidden", "max-lg:block", "fixed", "top-0", "left-0", "z-9001", "w-full", "h-screen", "bg-sky-800", "text-white", styles.menuMobile])}>
+      {/* Begin Menu Mobile */}
+      <div className={clsx(["hidden", "max-md:block", "fixed", "top-0", "left-0", "z-9001", "w-full", "h-screen", "bg-sky-800", "text-white", styles.menuMobile])} ref={menuMobileRef}>
+        <div className={clsx(["flex", "justify-center", "mt-20", "mb-10"])}>
+          <Link href={{ pathname: "/" }}>
+            <Image src="/logo.png" alt="My website" width={123} height={24} className={clsx(["w-30"])} />
+          </Link>
+        </div>
         <ul>
-          <li>
+          <li className={clsx(["font-bold", "text-md"])}>
             <Link href={{ pathname: "/" }}>Demos</Link>
           </li>
-          <li>
+          <li className={clsx(["font-bold", "text-md"])}>
             <Link href={{ pathname: "/" }}>Collection Pages</Link>
           </li>
-          <li>
+          <li className={clsx(["font-bold", "text-md"])}>
             <Link href={{ pathname: "/" }}>Product Pages</Link>
           </li>
-          <li>
+          <li className={clsx(["font-bold", "text-md"])}>
             <Link href={{ pathname: "/" }}>Responsive Layout</Link>
           </li>
-          <li>
+          <li className={clsx(["font-bold", "text-md"])}>
             <Link href={{ pathname: "/" }}>Features</Link>
           </li>
-          <li>
+          <li className={clsx(["font-bold", "text-md"])}>
             <Link href={{ pathname: "/" }}>FAQs</Link>
           </li>
-          <li>
+          <li className={clsx(["font-bold", "text-md"])}>
             <Link href={{ pathname: "/" }}>Documentation</Link>
           </li>
         </ul>
       </div>
       {isOpenMenuMobile ? (
-        <button role="button" className={clsx(["hidden", "max-lg:block", "fixed", "top-2", "right-8", "z-9001", "text-2xl", "text-white"])} onClick={handleOpenMenuMobile}>
-          <MenuOutlined />
-        </button>
-      ) : (
-        <button role="button" className={clsx(["hidden", "max-lg:block", "fixed", "top-2", "right-8", "z-9001", "text-2xl", "text-white"])} onClick={handleOpenMenuMobile}>
+        <button role="button" className={clsx(["hidden", "max-md:block", "fixed", "top-3", "right-3", "z-9001", "text-2xl", "text-white"])} onClick={handleOpenMenuMobile}>
           <CloseOutlined />
         </button>
+      ) : (
+        <button role="button" className={clsx(["hidden", "max-md:block", "fixed", "top-3", "right-3", "z-9001", "text-2xl", "text-white"])} onClick={handleOpenMenuMobile}>
+          <MenuOutlined />
+        </button>
       )}
-
-      <div className={clsx(["bg-[#e8eef1]", "pt-20"])}>
+      {/* End Menu Mobile */}
+      <div className={clsx(["bg-[#e8eef1]", "pt-20", "pl-4", "pr-4"])}>
         {slideshows.length > 0 && (
-          <div className={clsx(["w-260", "ml-auto", "mr-auto", "grid", "grid-cols-3", "gap-x-7", "gap-y-30"])} ref={productItemRef}>
+          <div className={clsx(["w-260", "max-md:w-full", "ml-auto", "mr-auto", "grid", "grid-cols-3", "max-md:grid-cols-2", "max-sm:grid-cols-1", "gap-x-7", "gap-y-30"])} ref={productItemRef}>
             {slideshows.map((item: string, idx: number) => {
               return (
                 <Link key={`product-${idx}`} href={{ pathname: "/" }} className={clsx(["bg-white", "pl-4", "pr-4", "pt-4", "pb-4", "rounded-xl", "shadow-2xl", styles.productItem])}>
