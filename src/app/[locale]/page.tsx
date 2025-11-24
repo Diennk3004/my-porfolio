@@ -5,8 +5,19 @@ import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
 import clsx from "clsx";
 import Image from "next/image";
 import React from "react";
+type IPolicy = {
+  title: string;
+  img: string;
+};
 const Home = () => {
   const slideshows: string[] = ["modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg"];
+  const policies: IPolicy[] = [
+    { title: "Documentation", img: "policy-1.png" },
+    { title: "License Policy", img: "policy-2.png" },
+    { title: "Refund Policy", img: "policy-3.png" },
+    { title: "Our Porfolio", img: "policy-4.png" },
+    { title: "Full Theme Features", img: "policy-5.png" }
+  ];
   const productItemRef = React.useRef<HTMLDivElement>(null);
   const labelRef = React.useRef<HTMLDivElement>(null);
   const ulRef = React.useRef<HTMLUListElement>(null);
@@ -107,7 +118,7 @@ const Home = () => {
     <React.Fragment>
       <header className={clsx(["h-screen", "bg-linear-to-br", "from-sky-900", "to-sky-400"])}>
         <div ref={headerRef}>
-          <div className={clsx(["flex", "gap-x-50", "pt-10", "pb-10", "pl-20", "pr-20"])}>
+          <div className={clsx(["flex", "gap-x-50", "max-xl:gap-x-10", "pt-10", "pb-10", "pl-20", "pr-20"])}>
             <div className={clsx(["w-31", "max-md:w-full", "max-md:flex", "max-md:justify-center"])}>
               <Link href={{ pathname: "/" }}>
                 <Image src="/logo.png" alt="My website" width={123} height={24} className={clsx(["w-full", "h-full"])} />
@@ -152,7 +163,7 @@ const Home = () => {
             </ul>
           </div>
         </div>
-        <div className={clsx(["w-full", "pl-20", "pr-20", "mt-20", "flex", "max-md:block"])}>
+        <div className={clsx(["w-full", "pl-20", "pr-20", "max-md:pl-4", "max-md:pr-4", "mt-20", "flex", "max-md:block"])}>
           <div className={clsx(["w-80", "max-md:w-full"])}>
             <div ref={labelRef}>
               <div className={clsx(["text-white", "font-bold", "text-2xl"])}>The Multipurpose</div>
@@ -213,20 +224,39 @@ const Home = () => {
         </button>
       )}
       {/* End Menu Mobile */}
-      <div className={clsx(["bg-[#e8eef1]", "pt-20", "pl-4", "pr-4"])}>
+      <div className={clsx(["bg-gray-100", "pt-20", "pb-20", "pl-4", "pr-4"])}>
         {slideshows.length > 0 && (
-          <div className={clsx(["w-260", "max-md:w-full", "ml-auto", "mr-auto", "grid", "grid-cols-3", "max-md:grid-cols-2", "max-sm:grid-cols-1", "gap-x-7", "gap-y-30"])} ref={productItemRef}>
+          <div className={clsx(["max-w-260", "ml-auto", "mr-auto", "grid", "grid-cols-3", "max-md:grid-cols-2", "gap-x-7", "gap-y-30"])} ref={productItemRef}>
             {slideshows.map((item: string, idx: number) => {
               return (
-                <Link key={`product-${idx}`} href={{ pathname: "/" }} className={clsx(["bg-white", "pl-4", "pr-4", "pt-4", "pb-4", "rounded-xl", "shadow-2xl", styles.productItem])}>
-                  <div>
-                    <Image src={`/${item}`} alt="Website" width={440} height={540} className={clsx(["w-full"])} />
-                  </div>
-                  <h3 className={clsx(["mt-8", "font-bold", "text-sm"])}>ModaMate - Home 1</h3>
-                  <div className={clsx(["mt-4", "text-xs", "text-gray-600"])}>Clothes and Fashion Shopify Theme</div>
-                </Link>
+                <div key={`product-${idx}`} className={clsx(["bg-white", "block", "pl-4", "pr-4", "pt-4", "pb-4", "rounded-xl", "shadow-2xl", styles.productItem])}>
+                  <Link href={{ pathname: "/" }}>
+                    <Image src={`/${item}`} alt="Website" width={440} height={540} />
+                    <h3 className={clsx(["mt-8", "font-bold", "text-sm"])}>ModaMate - Home 1</h3>
+                    <div className={clsx(["mt-4", "text-xs", "text-gray-600"])}>Clothes and Fashion Shopify Theme</div>
+                  </Link>
+                </div>
               );
             })}
+          </div>
+        )}
+      </div>
+      <div className={clsx(["pl-4", "pr-4", "pt-20", "pb-20"])}>
+        {policies.length > 0 && (
+          <div className={clsx(["max-w-7xl", "ml-auto", "mr-auto", "grid", "grid-cols-5", "max-lg:grid-cols-3", "max-md:grid-cols-2", "gap-x-10", "gap-y-10", "justify-center"])}>
+            {policies.map((item: IPolicy, idx: number) => {
+              return (
+                <div key={`policy-${idx}`} className={clsx(["bg-gray-100", "pt-15", "pb-7", "flex", "flex-col", "justify-center", "items-center", "gap-y-8", "rounded-2xl", styles.box])}>
+                  <div className={clsx([styles.img])}>
+                    <Link href={{ pathname: "/" }}>
+                      <Image src={`/${item.img}`} alt="Website" width={80} height={80} />
+                    </Link>
+                  </div>
+                  <h3 className={clsx(["font-bold", "text-sm"])}>{item.title}</h3>
+                </div>
+              );
+            })}
+            <div></div>
           </div>
         )}
       </div>
