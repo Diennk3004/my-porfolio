@@ -1,16 +1,22 @@
 "use client";
 import styles from "@/scss/mate.module.scss";
 import { Link } from "@/utils";
-import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
+import { MenuOutlined, CloseOutlined, CaretDownOutlined, MinusOutlined } from "@ant-design/icons";
 import clsx from "clsx";
 import Image from "next/image";
 import React from "react";
+import { produce } from "immer";
 type IPolicy = {
   title: string;
   img: string;
 };
+type IFaq = {
+  title: string;
+  content: string;
+  expanded: boolean;
+};
 const Home = () => {
-  const slideshows: string[] = ["modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg"];
+  const products: string[] = ["modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg"];
   const policies: IPolicy[] = [
     { title: "Documentation", img: "policy-1.png" },
     { title: "License Policy", img: "policy-2.png" },
@@ -18,12 +24,25 @@ const Home = () => {
     { title: "Our Porfolio", img: "policy-4.png" },
     { title: "Full Theme Features", img: "policy-5.png" }
   ];
+  const [faqs, setFaqs] = React.useState<IFaq[]>([
+    { title: "I bought the wrong theme, can I get a refund?", content: "When purchasing the wrong theme, please do not download it and immediately submit a refund request. We will check the theme status, if you haven’t downloaded the theme we will refund you. If you have downloaded the theme, you will not receive a refund. Even if we agree to refund you and during that time you download the theme, the refund decision will be reversed.", expanded: false },
+    { title: "What Is The Support Time?", content: "All of your emails will be reviewed and checked manually carefully. However, based on the number support tickets and the nature of the request itself, the response time can be up to 12 – 24 hours (Monday to Friday)", expanded: false },
+    { title: "After installing the theme, will my site be installed with sample data?", content: "Images used and included in this theme are for demo purpose only. COMMERCIAL USAGE IS NOT ALLOWED AND IS AT YOUR OWN RISK.", expanded: false },
+    { title: "Why am I not getting a response after sending support?", content: "Normally we never respond more than 12 - 24 hours after you submit a support request (Except Saturday and Sunday). However, there are some cases where we have responded but customers reflect in the comment that they have not received any emails. Please check some issues:", expanded: false },
+    { title: "Is the license I bought used forever or has a monthly fee ?", content: "You only need to pay once, no monthly payments", expanded: false },
+    { title: "Do I have to pay for any apps you integrate in the theme?", content: "Save $3200+ with our built-in theme features for Free.You don’t need to pay more for additional Apps", expanded: false }
+  ]);
   const productItemRef = React.useRef<HTMLDivElement>(null);
   const labelRef = React.useRef<HTMLDivElement>(null);
   const ulRef = React.useRef<HTMLUListElement>(null);
   const bannerRef = React.useRef<HTMLDivElement>(null);
   const headerRef = React.useRef<HTMLDivElement>(null);
   const menuMobileRef = React.useRef<HTMLDivElement>(null);
+  const box1Ref = React.useRef<HTMLDivElement>(null);
+  const box2Ref = React.useRef<HTMLDivElement>(null);
+  const box3Ref = React.useRef<HTMLDivElement>(null);
+  const box4Ref = React.useRef<HTMLDivElement>(null);
+  const box5Ref = React.useRef<HTMLDivElement>(null);
   const [isOpenMenuMobile, setOpenMenuMobile] = React.useState<boolean>(false);
   React.useEffect(() => {
     let offsetView: number = window.scrollY + window.innerHeight;
@@ -46,7 +65,7 @@ const Home = () => {
     }
     if (labelRef && labelRef.current) {
       if (offsetView >= labelRef.current.offsetTop) {
-        labelRef.current.classList.add(styles.labelOnScroll);
+        labelRef.current.classList.add(styles.sloganOnScroll);
       }
     }
     if (ulRef && ulRef.current) {
@@ -98,6 +117,31 @@ const Home = () => {
           }
         }
       }
+      if (box1Ref && box1Ref.current) {
+        if (offsetView >= box1Ref.current.offsetTop) {
+          box1Ref.current.classList.add(styles.box1);
+        }
+      }
+      if (box2Ref && box2Ref.current) {
+        if (offsetView >= box2Ref.current.offsetTop) {
+          box2Ref.current.classList.add(styles.box2);
+        }
+      }
+      if (box2Ref && box3Ref.current) {
+        if (offsetView >= box3Ref.current.offsetTop) {
+          box3Ref.current.classList.add(styles.box3);
+        }
+      }
+      if (box2Ref && box4Ref.current) {
+        if (offsetView >= box4Ref.current.offsetTop) {
+          box4Ref.current.classList.add(styles.box4);
+        }
+      }
+      if (box2Ref && box5Ref.current) {
+        if (offsetView >= box5Ref.current.offsetTop) {
+          box5Ref.current.classList.add(styles.box5);
+        }
+      }
     };
     window.addEventListener("scroll", onScroll);
     return () => {
@@ -114,6 +158,18 @@ const Home = () => {
       }
     }
   };
+  const handleFaqClick = (idx: number) => () => {
+    const nextState: IFaq[] = produce(faqs, (draft) => {
+      draft.forEach((elmt: IFaq, i: number) => {
+        if (idx === i) {
+          draft[idx].expanded = !draft[idx].expanded;
+        } else {
+          elmt.expanded = false;
+        }
+      });
+    });
+    setFaqs(nextState);
+  };
   return (
     <React.Fragment>
       <header className={clsx(["h-screen", "bg-linear-to-br", "from-sky-900", "to-sky-400"])}>
@@ -121,7 +177,7 @@ const Home = () => {
           <div className={clsx(["flex", "gap-x-50", "max-xl:gap-x-10", "pt-10", "pb-10", "pl-20", "pr-20"])}>
             <div className={clsx(["w-31", "max-md:w-full", "max-md:flex", "max-md:justify-center"])}>
               <Link href={{ pathname: "/" }}>
-                <Image src="/logo.png" alt="My website" width={123} height={24} className={clsx(["w-full", "h-full"])} />
+                <Image src="/logo.png" alt="My website" width={123} height={24} />
               </Link>
             </div>
             <ul className={clsx(["flex", "max-md:hidden", "items-center", "gap-x-5", "text-xs", "text-white", "font-bold"])}>
@@ -164,7 +220,7 @@ const Home = () => {
           </div>
         </div>
         <div className={clsx(["w-full", "pl-20", "pr-20", "max-md:pl-4", "max-md:pr-4", "mt-20", "flex", "max-md:block"])}>
-          <div className={clsx(["w-80", "max-md:w-full"])}>
+          <div className={clsx(["w-150", "max-md:w-full"])}>
             <div ref={labelRef}>
               <div className={clsx(["text-white", "font-bold", "text-2xl"])}>The Multipurpose</div>
               <div className={clsx(["text-white", "font-bold", "text-2xl"])}>Premium Shopify Theme</div>
@@ -225,9 +281,9 @@ const Home = () => {
       )}
       {/* End Menu Mobile */}
       <div className={clsx(["bg-gray-100", "pt-20", "pb-20", "pl-4", "pr-4"])}>
-        {slideshows.length > 0 && (
-          <div className={clsx(["max-w-260", "ml-auto", "mr-auto", "grid", "grid-cols-3", "max-md:grid-cols-2", "gap-x-7", "gap-y-30"])} ref={productItemRef}>
-            {slideshows.map((item: string, idx: number) => {
+        {products.length > 0 && (
+          <div className={clsx(["max-w-7xl", "ml-auto", "mr-auto", "grid", "grid-cols-3", "max-md:grid-cols-2", "gap-x-7", "gap-y-30"])} ref={productItemRef}>
+            {products.map((item: string, idx: number) => {
               return (
                 <div key={`product-${idx}`} className={clsx(["bg-white", "block", "pl-4", "pr-4", "pt-4", "pb-4", "rounded-xl", "shadow-2xl", styles.productItem])}>
                   <Link href={{ pathname: "/" }}>
@@ -244,19 +300,66 @@ const Home = () => {
       <div className={clsx(["pl-4", "pr-4", "pt-20", "pb-20"])}>
         {policies.length > 0 && (
           <div className={clsx(["max-w-7xl", "ml-auto", "mr-auto", "grid", "grid-cols-5", "max-lg:grid-cols-3", "max-md:grid-cols-2", "gap-x-10", "gap-y-10", "justify-center"])}>
-            {policies.map((item: IPolicy, idx: number) => {
+            <div className={clsx(["bg-gray-100", "pt-15", "pb-7", "flex", "flex-col", "justify-center", "items-center", "gap-y-8", "rounded-2xl", styles.box])} ref={box1Ref}>
+              <div className={clsx([styles.img])}>
+                <Link href={{ pathname: "/" }}>
+                  <Image src="/policy-1.png" alt="Website" width={80} height={80} />
+                </Link>
+              </div>
+              <h3 className={clsx(["font-bold", "text-sm"])}>Documentation</h3>
+            </div>
+            <div className={clsx(["bg-gray-100", "pt-15", "pb-7", "flex", "flex-col", "justify-center", "items-center", "gap-y-8", "rounded-2xl", styles.box])} ref={box2Ref}>
+              <div className={clsx([styles.img])}>
+                <Link href={{ pathname: "/" }}>
+                  <Image src="/policy-2.png" alt="Website" width={80} height={80} />
+                </Link>
+              </div>
+              <h3 className={clsx(["font-bold", "text-sm"])}>License Policy</h3>
+            </div>
+            <div className={clsx(["bg-gray-100", "pt-15", "pb-7", "flex", "flex-col", "justify-center", "items-center", "gap-y-8", "rounded-2xl", styles.box])} ref={box3Ref}>
+              <div className={clsx([styles.img])}>
+                <Link href={{ pathname: "/" }}>
+                  <Image src="/policy-3.png" alt="Website" width={80} height={80} />
+                </Link>
+              </div>
+              <h3 className={clsx(["font-bold", "text-sm"])}>Refund Policy</h3>
+            </div>
+            <div className={clsx(["bg-gray-100", "pt-15", "pb-7", "flex", "flex-col", "justify-center", "items-center", "gap-y-8", "rounded-2xl", styles.box])} ref={box4Ref}>
+              <div className={clsx([styles.img])}>
+                <Link href={{ pathname: "/" }}>
+                  <Image src="/policy-4.png" alt="Website" width={80} height={80} />
+                </Link>
+              </div>
+              <h3 className={clsx(["font-bold", "text-sm"])}>Our Portfolio</h3>
+            </div>
+            <div className={clsx(["bg-gray-100", "pt-15", "pb-7", "flex", "flex-col", "justify-center", "items-center", "gap-y-8", "rounded-2xl", styles.box])} ref={box5Ref}>
+              <div className={clsx([styles.img])}>
+                <Link href={{ pathname: "/" }}>
+                  <Image src="/policy-5.png" alt="Website" width={80} height={80} />
+                </Link>
+              </div>
+              <h3 className={clsx(["font-bold", "text-sm"])}>Full Theme Features</h3>
+            </div>
+          </div>
+        )}
+        {faqs.length > 0 && (
+          <div className={clsx(["max-w-7xl", "ml-auto", "mr-auto", "mt-20", styles.faqs])}>
+            {faqs.map((item: IFaq, idx: number) => {
               return (
-                <div key={`policy-${idx}`} className={clsx(["bg-gray-100", "pt-15", "pb-7", "flex", "flex-col", "justify-center", "items-center", "gap-y-8", "rounded-2xl", styles.box])}>
-                  <div className={clsx([styles.img])}>
-                    <Link href={{ pathname: "/" }}>
-                      <Image src={`/${item.img}`} alt="Website" width={80} height={80} />
-                    </Link>
+                <div key={`faq-${idx}`} className={clsx(["border-t", "border-gray-200", "pt-6", "pb-6", "relative", styles.faqItem])}>
+                  <div className={clsx([item.expanded === true ? "relative" : "absolute", "top-0", "left-0", "h-full", "flex", "items-center"])}>
+                    <button className={clsx(["cursor-pointer", "font-bold", "h-full", "text-left"])} onClick={handleFaqClick(idx)}>
+                      {item.title}
+                    </button>
                   </div>
-                  <h3 className={clsx(["font-bold", "text-sm"])}>{item.title}</h3>
+                  <div className={clsx(["mt-3", "pr-5", "overflow-y-hidden", styles.faqContent, item.expanded === true && styles.active])}>{item.expanded && item.content}</div>
+                  <button className={clsx(["absolute", "top-0", "right-0", "h-full", "flex", item.expanded ? "items-start" : "items-center", "cursor-pointer", "pl-2", item.expanded && "pt-2"])} onClick={handleFaqClick(idx)}>
+                    {item.expanded === false ? <CaretDownOutlined /> : <MinusOutlined />}
+                  </button>
+                  <div className={clsx(["absolute", "bottom-0", "left-0", "bg-gray-950", styles.line])}></div>
                 </div>
               );
             })}
-            <div></div>
           </div>
         )}
       </div>

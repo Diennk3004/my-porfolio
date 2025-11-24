@@ -18,20 +18,20 @@
 }
 .productItem {
   transform: translateY(0);
-  transition: transform 500ms;
-  transition-timing-function: ease-in;
+  transition: transform 1s;
+  transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
   &:hover {
     transform: translateY(-10px);
   }
 }
 .productOnScroll {
-  animation: myProductFadeUp;
+  animation: myAnimationProduct;
   animation-duration: 1s;
   animation-timing-function: ease-in;
 }
-@keyframes myProductFadeUp {
+@keyframes myAnimationProduct {
   from {
-    transform: translateY(40px);
+    transform: translateY(70px);
     visibility: hidden;
     opacity: 0;
   }
@@ -41,12 +41,12 @@
     opacity: 1;
   }
 }
-.labelOnScroll {
-  animation: myLabelFadeUp;
+.sloganOnScroll {
+  animation: myAnimationSlogan;
   animation-duration: 1s;
   animation-timing-function: ease-in;
 }
-@keyframes myLabelFadeUp {
+@keyframes myAnimationSlogan {
   from {
     transform: translateY(20px);
     visibility: hidden;
@@ -59,11 +59,11 @@
   }
 }
 .ulOnScroll {
-  animation: myUlFadeUp;
+  animation: myAnimationUL;
   animation-duration: 2s;
   animation-timing-function: ease-in;
 }
-@keyframes myUlFadeUp {
+@keyframes myAnimationUL {
   from {
     transform: translateY(40px);
     visibility: hidden;
@@ -76,11 +76,11 @@
   }
 }
 .bannerOnScroll {
-  animation: myBannerFadeUp;
+  animation: myAnimationBanner;
   animation-duration: 1s;
   animation-timing-function: ease-in;
 }
-@keyframes myBannerFadeUp {
+@keyframes myAnimationBanner {
   from {
     transform: translateY(60px);
     visibility: hidden;
@@ -111,15 +111,15 @@
     a {
       img {
         &:hover {
-          animation: myBox;
-          animation-duration: 2s;
-          animation-timing-function: ease-out;
+          animation: myAnimationBox;
+          animation-duration: 1s;
+          animation-timing-function: ease-in;
         }
       }
     }
   }
 }
-@keyframes myBox {
+@keyframes myAnimationBox {
   0% {
     transform: translateX(0);
   }
@@ -146,5 +146,102 @@
   }
   80% {
     transform: translateX(0);
+  }
+}
+.box1 {
+  animation: myAnimationPolicy1;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+}
+.box2 {
+  animation: myAnimationPolicy2;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-out;
+}
+.box3 {
+  animation: myAnimationPolicy3;
+  animation-duration: 2s;
+  animation-timing-function: ease-out;
+}
+.box4 {
+  animation: myAnimationPolicy4;
+  animation-duration: 2.5s;
+  animation-timing-function: ease-out;
+}
+.box5 {
+  animation: myAnimationPolicy5;
+  animation-duration: 3s;
+  animation-timing-function: ease-out;
+}
+@keyframes myAnimationPolicy1 {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes myAnimationPolicy2 {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes myAnimationPolicy3 {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes myAnimationPolicy4 {
+  from {
+    transform: translateY(60px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes myAnimationPolicy5 {
+  from {
+    transform: translateY(70px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.faqs {
+  .faqItem {
+    .faqContent {
+      height: 0;
+      transition: height 500ms;
+      &.active {
+        height: 50px;
+      }
+    }
+    .line {
+      height: 1px;
+      width: 0;
+      border-bottom: 1px solid var(--color-gray-900);
+      transition: width 500ms;
+    }
+    &:hover {
+      .line {
+        width: 200px;
+      }
+    }
   }
 }
