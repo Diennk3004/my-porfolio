@@ -31,7 +31,7 @@
 }
 @keyframes myAnimationProduct {
   from {
-    transform: translateY(70px);
+    transform: translateY(30px);
     visibility: hidden;
     opacity: 0;
   }
@@ -48,7 +48,7 @@
 }
 @keyframes myAnimationSlogan {
   from {
-    transform: translateY(20px);
+    transform: translateY(50%);
     visibility: hidden;
     opacity: 0;
   }
@@ -65,7 +65,7 @@
 }
 @keyframes myAnimationUL {
   from {
-    transform: translateY(40px);
+    transform: translateY(100%);
     visibility: hidden;
     opacity: 0;
   }
@@ -243,5 +243,55 @@
         width: 200px;
       }
     }
+  }
+}
+.animals {
+  .item {
+    .mask {
+      background: #0000005a;
+      opacity: 0;
+      width: 0;
+      transition: opacity 0.5s ease-in, width 0.5s ease-in;
+    }
+    &:hover {
+      .mask {
+        opacity: 1;
+        width: 100%;
+      }
+    }
+    .showNow {
+      .expanded {
+        opacity: 0;
+        width: 0;
+        transition: opacity 0.5s ease-in, width 0.5s ease-in;
+      }
+      &:hover {
+        .expanded {
+          opacity: 1;
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+.animalsOnScroll {
+  animation: myAnimationAnimals;
+  animation-duration: 1s;
+  animation-timing-function: ease-in;
+}
+@keyframes myAnimationAnimals {
+  from {
+    transform: translateY(50%);
+    visibility: hidden;
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    visibility: visible;
+    opacity: 1;
+  }
+}
+.sliders {
+  .banners {
   }
 }

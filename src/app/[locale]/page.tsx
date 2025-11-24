@@ -1,7 +1,7 @@
 "use client";
 import styles from "@/scss/mate.module.scss";
 import { Link } from "@/utils";
-import { MenuOutlined, CloseOutlined, CaretDownOutlined, MinusOutlined } from "@ant-design/icons";
+import { MenuOutlined, CloseOutlined, CaretDownOutlined, MinusOutlined, ArrowLeftOutlined, LeftOutlined, RightOutlined } from "@ant-design/icons";
 import clsx from "clsx";
 import Image from "next/image";
 import React from "react";
@@ -15,6 +15,15 @@ type IFaq = {
   content: string;
   expanded: boolean;
 };
+type IAnimal = {
+  title: string;
+  content: string;
+  img: string;
+};
+type IBanner = {
+  img: string;
+  active: boolean;
+};
 const Home = () => {
   const products: string[] = ["modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg", "modamate-1.jpg"];
   const policies: IPolicy[] = [
@@ -23,6 +32,13 @@ const Home = () => {
     { title: "Refund Policy", img: "policy-3.png" },
     { title: "Our Porfolio", img: "policy-4.png" },
     { title: "Full Theme Features", img: "policy-5.png" }
+  ];
+  const animals: IAnimal[] = [
+    { title: "Clay Toy", content: "Eu feugiat pretium nibh ipsum sed augue lacus", img: "animal-1.jpg" },
+    { title: "Running Horse", content: "Donec sodales sagittis magna sed consequat", img: "animal-2.jpg" },
+    { title: "Bird Nest", content: "Curabitur ullamcorper ultricies nisi nam eget", img: "animal-3.jpg" },
+    { title: "Wooden Toy", content: "Maecenas nec odio et ante tincidunt tempus", img: "animal-4.jpg" },
+    { title: "Elephant", content: "Donec mollis hendrerit risus phasellus nec", img: "animal-5.jpg" }
   ];
   const [faqs, setFaqs] = React.useState<IFaq[]>([
     { title: "I bought the wrong theme, can I get a refund?", content: "When purchasing the wrong theme, please do not download it and immediately submit a refund request. We will check the theme status, if you haven’t downloaded the theme we will refund you. If you have downloaded the theme, you will not receive a refund. Even if we agree to refund you and during that time you download the theme, the refund decision will be reversed.", expanded: false },
@@ -38,11 +54,19 @@ const Home = () => {
   const bannerRef = React.useRef<HTMLDivElement>(null);
   const headerRef = React.useRef<HTMLDivElement>(null);
   const menuMobileRef = React.useRef<HTMLDivElement>(null);
+  const animalsRef = React.useRef<HTMLDivElement>(null);
   const box1Ref = React.useRef<HTMLDivElement>(null);
   const box2Ref = React.useRef<HTMLDivElement>(null);
   const box3Ref = React.useRef<HTMLDivElement>(null);
   const box4Ref = React.useRef<HTMLDivElement>(null);
   const box5Ref = React.useRef<HTMLDivElement>(null);
+  const [banners, setBanners] = React.useState<IBanner[]>([
+    { img: "banner-1.jpg", active: true },
+    { img: "banner-2.jpg", active: false },
+    { img: "banner-3.jpg", active: false },
+    { img: "banner-4.jpg", active: false },
+    { img: "banner-5.jpg", active: false }
+  ]);
   const [isOpenMenuMobile, setOpenMenuMobile] = React.useState<boolean>(false);
   React.useEffect(() => {
     let offsetView: number = window.scrollY + window.innerHeight;
@@ -76,6 +100,36 @@ const Home = () => {
     if (bannerRef && bannerRef.current) {
       if (offsetView >= bannerRef.current.offsetTop) {
         bannerRef.current.classList.add(styles.bannerOnScroll);
+      }
+    }
+    if (box1Ref && box1Ref.current) {
+      if (offsetView >= box1Ref.current.offsetTop) {
+        box1Ref.current.classList.add(styles.box1);
+      }
+    }
+    if (box2Ref && box2Ref.current) {
+      if (offsetView >= box2Ref.current.offsetTop) {
+        box2Ref.current.classList.add(styles.box2);
+      }
+    }
+    if (box2Ref && box3Ref.current) {
+      if (offsetView >= box3Ref.current.offsetTop) {
+        box3Ref.current.classList.add(styles.box3);
+      }
+    }
+    if (box2Ref && box4Ref.current) {
+      if (offsetView >= box4Ref.current.offsetTop) {
+        box4Ref.current.classList.add(styles.box4);
+      }
+    }
+    if (box2Ref && box5Ref.current) {
+      if (offsetView >= box5Ref.current.offsetTop) {
+        box5Ref.current.classList.add(styles.box5);
+      }
+    }
+    if (animalsRef && animalsRef.current) {
+      if (offsetView >= animalsRef.current.offsetTop) {
+        animalsRef.current.classList.add(styles.animalsOnScroll);
       }
     }
     const onScroll = () => {
@@ -142,6 +196,11 @@ const Home = () => {
           box5Ref.current.classList.add(styles.box5);
         }
       }
+      if (animalsRef && animalsRef.current) {
+        if (offsetView >= animalsRef.current.offsetTop) {
+          animalsRef.current.classList.add(styles.animalsOnScroll);
+        }
+      }
     };
     window.addEventListener("scroll", onScroll);
     return () => {
@@ -170,6 +229,34 @@ const Home = () => {
     });
     setFaqs(nextState);
   };
+  const handleSliderChange = (direction: string) => () => {
+    const nextState: IBanner[] = produce(banners, (draft) => {
+      for (var i = 0; i < draft.length; i++) {
+        if (draft[i].active === true) {
+          draft[i].active = false;
+          if (direction === "next") {
+            if (i + 1 < draft.length) {
+              draft[i + 1].active = true;
+              break;
+            } else {
+              draft[0].active = true;
+              break;
+            }
+          } else {
+            if (i - 1 >= 0) {
+              draft[i - 1].active = true;
+              break;
+            } else {
+              draft[draft.length - 1].active = true;
+              break;
+            }
+          }
+        }
+      }
+    });
+    setBanners(nextState);
+  };
+  console.log("banners = ", banners);
   return (
     <React.Fragment>
       <header className={clsx(["h-screen", "bg-linear-to-br", "from-sky-900", "to-sky-400"])}>
@@ -363,6 +450,55 @@ const Home = () => {
           </div>
         )}
       </div>
+      {banners && (
+        <div className={clsx(["max-w-640", "ml-auto", "mr-auto", "pt-20", "pb-20", "flex", "justify-center", "relative", styles.sliders])}>
+          <div className={clsx(["relative", styles.banners])}>
+            {banners.map((item: IBanner, idx: number) => {
+              return (
+                <div key={`banner-slide-${idx}`} className={clsx(["absolute", "w-full", "h-full", "top-0", "left-0"])} style={{ zIndex: item.active ? 100 : idx }}>
+                  <Image alt="Website" width={1700} height={717} src={`/${item.img}`} className={clsx(["h-180", "w-425"])} />
+                </div>
+              );
+            })}
+          </div>
+          <div className={clsx(["absolute", "top-0", "left-0", "w-20", "h-full", "flex", "justify-center", "items-center"])}>
+            <button className={clsx(["w-10", "h-10", "flex", "justify-center", "items-center", "rounded-3xl", "border", "border-gray-950", "cursor-pointer"])} onClick={handleSliderChange("prev")}>
+              <LeftOutlined />
+            </button>
+          </div>
+          <div className={clsx(["absolute", "top-0", "right-0", "w-20", "h-full", "flex", "justify-center", "items-center"])}>
+            <button className={clsx(["w-10", "h-10", "flex", "justify-center", "items-center", "rounded-3xl", "border", "border-gray-950", "cursor-pointer"])} onClick={handleSliderChange("next")}>
+              <RightOutlined />
+            </button>
+          </div>
+        </div>
+      )}
+      {animals.length > 0 && (
+        <div className={clsx(["max-w-470", "pb-20", "ml-auto", "mr-auto", "grid", "grid-cols-5", "max-lg:grid-cols-3", "max-md:grid-cols-2", "justify-center", styles.animals])} ref={animalsRef}>
+          {animals.map((item: IAnimal, idx: number) => {
+            return (
+              <div key={`animal-${idx}`} className={clsx(["relative", "cursor-pointer", styles.item])}>
+                <div className={clsx(["flex", "justify-center"])}>
+                  <Image src={`/${item.img}`} alt="Website" width={375} height={444} />
+                </div>
+                <div className={clsx(["absolute", "top-0", "left-0", "h-full", styles.mask])}></div>
+                <div className={clsx(["absolute", "bottom-0", "left-0", "w-full", "pl-5", "pr-5", "pb-10"])}>
+                  <h3 className={clsx([idx % 2 === 0 ? "text-white" : "text-gray-950", "text-center", "uppercase", "font-bold", "text-2xl"])}>{item.title}</h3>
+                  <h4 className={clsx([idx % 2 === 0 ? "text-white" : "text-gray-950", "text-center", "mt-4"])}>{item.content}</h4>
+                  <div className={clsx(["flex", "justify-center", "mt-5"])}>
+                    <div className={clsx(["border-2", "border-cyan-300", "rounded-3xl", "pt-2", "pb-2", "pl-5", "pr-5", "text-center", "relative", styles.showNow])}>
+                      <div className={clsx(["bg-cyan-300", "absolute", "top-0", "left-0", "h-full", "rounded-3xl", styles.expanded])}></div>
+                      <Link href={{ pathname: "/" }} className={clsx([idx % 2 === 0 ? "text-white" : "text-gray-950", "relative"])}>
+                        Shop Now
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </React.Fragment>
   );
 };
