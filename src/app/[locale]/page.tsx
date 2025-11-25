@@ -483,32 +483,34 @@ const Home = () => {
           </div>
         </div>
       )}
-      {animals.length > 0 && (
-        <div className={clsx(["max-w-470", "pb-20", "ml-auto", "mr-auto", "grid", "grid-cols-5", "max-lg:grid-cols-3", "max-md:grid-cols-2", "justify-center", styles.animals])} ref={animalsRef}>
-          {animals.map((item: IAnimal, idx: number) => {
-            return (
-              <div key={`animal-${idx}`} className={clsx(["relative", "cursor-pointer", styles.item])}>
-                <div className={clsx(["flex", "justify-center"])}>
-                  <Image src={`/${item.img}`} alt="Website" width={375} height={444} />
-                </div>
-                <div className={clsx(["absolute", "top-0", "left-0", "h-full", styles.mask])}></div>
-                <div className={clsx(["absolute", "bottom-0", "left-0", "w-full", "pl-5", "pr-5", "pb-10"])}>
-                  <h3 className={clsx([idx % 2 === 0 ? "text-white" : "text-gray-950", "text-center", "uppercase", "font-bold", "text-2xl"])}>{item.title}</h3>
-                  <h4 className={clsx([idx % 2 === 0 ? "text-white" : "text-gray-950", "text-center", "mt-4"])}>{item.content}</h4>
-                  <div className={clsx(["flex", "justify-center", "mt-5"])}>
-                    <div className={clsx(["border-2", "border-cyan-300", "rounded-3xl", "pt-2", "pb-2", "pl-5", "pr-5", "text-center", "relative", styles.showNow])}>
-                      <div className={clsx(["bg-cyan-300", "absolute", "top-0", "left-0", "h-full", "rounded-3xl", styles.expanded])}></div>
-                      <Link href={{ pathname: "/" }} className={clsx([idx % 2 === 0 ? "text-white" : "text-gray-950", "relative"])}>
-                        Shop Now
-                      </Link>
+      <div className={clsx(["pl-4", "pr-4", "pb-20"])}>
+        {animals.length > 0 && (
+          <div className={clsx(["max-w-470", "grid", "grid-cols-5", "max-lg:grid-cols-3", "max-md:grid-cols-2", "justify-center", styles.animals])} ref={animalsRef}>
+            {animals.map((item: IAnimal, idx: number) => {
+              return (
+                <div key={`animal-${idx}`} className={clsx(["relative", "cursor-pointer", styles.item])}>
+                  <div className={clsx(["flex", "justify-center"])}>
+                    <Image src={`/${item.img}`} alt="Website" width={375} height={444} />
+                  </div>
+                  <div className={clsx(["absolute", "top-0", "left-0", "h-full", styles.mask])}></div>
+                  <div className={clsx(["absolute", "bottom-0", "left-0", "w-full", "pl-5", "pr-5", "pb-10"])}>
+                    <h3 className={clsx([idx % 2 === 0 ? "text-white" : "text-gray-950", "text-center", "uppercase", "font-bold", "text-2xl"])}>{item.title}</h3>
+                    <h4 className={clsx([idx % 2 === 0 ? "text-white" : "text-gray-950", "text-center", "mt-4"])}>{item.content}</h4>
+                    <div className={clsx(["flex", "justify-center", "mt-5"])}>
+                      <div className={clsx(["border-2", "border-cyan-300", "rounded-3xl", "pt-2", "pb-2", "pl-5", "pr-5", "text-center", "relative", styles.showNow])}>
+                        <div className={clsx(["bg-cyan-300", "absolute", "top-0", "left-0", "h-full", "rounded-3xl", styles.expanded])}></div>
+                        <Link href={{ pathname: "/" }} className={clsx([idx % 2 === 0 ? "text-white" : "text-gray-950", "relative"])}>
+                          Shop Now
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
-      )}
+              );
+            })}
+          </div>
+        )}
+      </div>
       <button className={clsx(["fixed", "bottom-10", "right-20", "text-white", "bg-sky-600", "w-10", "h-10", "rounded-3xl", "cursor-pointer"])} onClick={handleScrollTop}>
         <ArrowUpOutlined />
       </button>
