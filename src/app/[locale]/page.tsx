@@ -68,6 +68,7 @@ const Home = () => {
     { img: "banner-5.jpg", active: false }
   ]);
   const [isOpenMenuMobile, setOpenMenuMobile] = React.useState<boolean>(false);
+  const [directionSlider, setDirectionSlider] = React.useState<string>("next");
   React.useEffect(() => {
     let offsetView: number = window.scrollY + window.innerHeight;
     let childNodes = null;
@@ -255,8 +256,8 @@ const Home = () => {
       }
     });
     setBanners(nextState);
+    setDirectionSlider(direction);
   };
-  console.log("banners = ", banners);
   return (
     <React.Fragment>
       <header className={clsx(["h-screen", "bg-linear-to-br", "from-sky-900", "to-sky-400"])}>
@@ -451,23 +452,23 @@ const Home = () => {
         )}
       </div>
       {banners && (
-        <div className={clsx(["max-w-640", "ml-auto", "mr-auto", "pt-20", "pb-20", "flex", "justify-center", "relative", styles.sliders])}>
-          <div className={clsx(["relative", styles.banners])}>
+        <div className={clsx(["max-w-640", "h-180", "max-lg:h-90", "max-md:h-50", "ml-auto", "mr-auto", "mb-20", "relative", styles.sliders])}>
+          <div className={clsx(["relative", "w-full", "h-full", "z-1", styles.banners])}>
             {banners.map((item: IBanner, idx: number) => {
               return (
-                <div key={`banner-slide-${idx}`} className={clsx(["absolute", "w-full", "h-full", "top-0", "left-0"])} style={{ zIndex: item.active ? 100 : idx }}>
-                  <Image alt="Website" width={1700} height={717} src={`/${item.img}`} className={clsx(["h-180", "w-425"])} />
+                <div key={`banner-slide-${idx}`} style={{ zIndex: item.active ? 99 : idx }} className={clsx(["absolute", "w-full", "h-full", "top-0", "left-0", item.active && directionSlider === "prev" && styles.activeSliderPrev, item.active && directionSlider === "next" && styles.activeSliderNext])}>
+                  <Image alt="Website" width={1700} height={717} src={`/${item.img}`} className={clsx(["w-full", "h-full"])} />
                 </div>
               );
             })}
           </div>
-          <div className={clsx(["absolute", "top-0", "left-0", "w-20", "h-full", "flex", "justify-center", "items-center"])}>
-            <button className={clsx(["w-10", "h-10", "flex", "justify-center", "items-center", "rounded-3xl", "border", "border-gray-950", "cursor-pointer"])} onClick={handleSliderChange("prev")}>
+          <div className={clsx(["absolute", "top-0", "left-0", "w-20", "h-full", "flex", "justify-center", "items-center", "z-2"])}>
+            <button className={clsx(["w-10", "h-10", "flex", "justify-center", "items-center", "rounded-3xl", "border-2", "border-white", "cursor-pointer", "text-white", "font-bold"])} onClick={handleSliderChange("prev")}>
               <LeftOutlined />
             </button>
           </div>
-          <div className={clsx(["absolute", "top-0", "right-0", "w-20", "h-full", "flex", "justify-center", "items-center"])}>
-            <button className={clsx(["w-10", "h-10", "flex", "justify-center", "items-center", "rounded-3xl", "border", "border-gray-950", "cursor-pointer"])} onClick={handleSliderChange("next")}>
+          <div className={clsx(["absolute", "top-0", "right-0", "w-20", "h-full", "flex", "justify-center", "items-center", "z-3"])}>
+            <button className={clsx(["w-10", "h-10", "flex", "justify-center", "items-center", "rounded-3xl", "border-2", "border-white", "cursor-pointer", "text-white", "font-bold"])} onClick={handleSliderChange("next")}>
               <RightOutlined />
             </button>
           </div>

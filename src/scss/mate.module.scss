@@ -229,7 +229,7 @@
       height: 0;
       transition: height 500ms;
       &.active {
-        height: 50px;
+        height: 5rem;
       }
     }
     .line {
@@ -293,5 +293,35 @@
 }
 .sliders {
   .banners {
+    .activeSliderPrev {
+      animation: myAnimationSliderPrev;
+      animation-duration: 1s;
+      animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    .activeSliderNext {
+      animation: myAnimationSliderNext;
+      animation-duration: 1s;
+      animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+  }
+}
+@keyframes myAnimationSliderPrev {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes myAnimationSliderNext {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
