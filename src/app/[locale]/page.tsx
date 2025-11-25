@@ -1,7 +1,7 @@
 "use client";
 import styles from "@/scss/mate.module.scss";
 import { Link } from "@/utils";
-import { MenuOutlined, CloseOutlined, CaretDownOutlined, MinusOutlined, ArrowLeftOutlined, LeftOutlined, RightOutlined } from "@ant-design/icons";
+import { MenuOutlined, CloseOutlined, CaretDownOutlined, MinusOutlined, ArrowLeftOutlined, LeftOutlined, RightOutlined, ArrowUpOutlined } from "@ant-design/icons";
 import clsx from "clsx";
 import Image from "next/image";
 import React from "react";
@@ -48,18 +48,18 @@ const Home = () => {
     { title: "Is the license I bought used forever or has a monthly fee ?", content: "You only need to pay once, no monthly payments", expanded: false },
     { title: "Do I have to pay for any apps you integrate in the theme?", content: "Save $3200+ with our built-in theme features for Free.You don’t need to pay more for additional Apps", expanded: false }
   ]);
-  const productItemRef = React.useRef<HTMLDivElement>(null);
-  const labelRef = React.useRef<HTMLDivElement>(null);
+  const productItemRef = React.useRef<HTMLDivElement | null>(null);
+  const labelRef = React.useRef<HTMLDivElement | null>(null);
   const ulRef = React.useRef<HTMLUListElement>(null);
-  const bannerRef = React.useRef<HTMLDivElement>(null);
-  const headerRef = React.useRef<HTMLDivElement>(null);
-  const menuMobileRef = React.useRef<HTMLDivElement>(null);
-  const animalsRef = React.useRef<HTMLDivElement>(null);
-  const box1Ref = React.useRef<HTMLDivElement>(null);
-  const box2Ref = React.useRef<HTMLDivElement>(null);
-  const box3Ref = React.useRef<HTMLDivElement>(null);
-  const box4Ref = React.useRef<HTMLDivElement>(null);
-  const box5Ref = React.useRef<HTMLDivElement>(null);
+  const bannerRef = React.useRef<HTMLDivElement | null>(null);
+  const headerRef = React.useRef<HTMLDivElement | null>(null);
+  const menuMobileRef = React.useRef<HTMLDivElement | null>(null);
+  const animalsRef = React.useRef<HTMLDivElement | null>(null);
+  const box1Ref = React.useRef<HTMLDivElement | null>(null);
+  const box2Ref = React.useRef<HTMLDivElement | null>(null);
+  const box3Ref = React.useRef<HTMLDivElement | null>(null);
+  const box4Ref = React.useRef<HTMLDivElement | null>(null);
+  const box5Ref = React.useRef<HTMLDivElement | null>(null);
   const [banners, setBanners] = React.useState<IBanner[]>([
     { img: "banner-1.jpg", active: true },
     { img: "banner-2.jpg", active: false },
@@ -258,6 +258,14 @@ const Home = () => {
     setBanners(nextState);
     setDirectionSlider(direction);
   };
+  const handleScrollToBottom = () => {
+    if (animalsRef && animalsRef.current) {
+      animalsRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+  const handleScrollTop = () => {
+    window.scroll({ top: 0, behavior: "smooth" });
+  };
   return (
     <React.Fragment>
       <header className={clsx(["h-screen", "bg-linear-to-br", "from-sky-900", "to-sky-400"])}>
@@ -268,16 +276,16 @@ const Home = () => {
                 <Image src="/logo.png" alt="My website" width={123} height={24} />
               </Link>
             </div>
-            <ul className={clsx(["flex", "max-md:hidden", "items-center", "gap-x-5", "text-xs", "text-white", "font-bold"])}>
+            <ul className={clsx(["flex", "max-md:hidden", "items-center", "gap-x-5", "text-xs", "text-white", "font-bold", "cursor-pointer"])}>
               <li>
                 <Link href={{ pathname: "/" }} className={clsx(["hover:text-sky-400"])}>
                   Demos
                 </Link>
               </li>
               <li>
-                <Link href={{ pathname: "/" }} className={clsx(["hover:text-sky-400"])}>
+                <button className={clsx(["hover:text-sky-400", "cursor-pointer"])} onClick={handleScrollToBottom}>
                   Collection Pages
-                </Link>
+                </button>
               </li>
               <li>
                 <Link href={{ pathname: "/" }} className={clsx(["hover:text-sky-400"])}>
@@ -501,6 +509,9 @@ const Home = () => {
           })}
         </div>
       )}
+      <button className={clsx(["fixed", "bottom-10", "right-20", "text-white", "bg-sky-600", "w-10", "h-10", "rounded-3xl", "cursor-pointer"])} onClick={handleScrollTop}>
+        <ArrowUpOutlined />
+      </button>
     </React.Fragment>
   );
 };
