@@ -14,12 +14,12 @@ const ConfigProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
     const init = async () => {
       const projectConfigJson: string | null = localStorage.getItem(process.env.NEXT_PUBLIC_APP_CONFIG ? process.env.NEXT_PUBLIC_APP_CONFIG.toString() : "");
       if (projectConfigJson) {
-        const projectConfigObj: IConfig = JSON.parse(projectConfigJson);
-        if (projectConfigObj) {
-          onChangeLocale(projectConfigObj.locale ? projectConfigObj.locale.toString() : "vi");
+        const projectConfigObj: IConfig | null = JSON.parse(projectConfigJson);
+        if (projectConfigObj && projectConfigObj.locale) {
+          onChangeLocale(projectConfigObj.locale.toString());
         }
       } else {
-        onChangeLocale("vi");
+        onChangeLocale(config.locale);
       }
     };
     init();
