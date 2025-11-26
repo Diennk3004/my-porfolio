@@ -460,7 +460,7 @@ const Home = () => {
         )}
       </div>
       {banners && (
-        <div className={clsx(["max-w-640", "h-180", "max-lg:h-90", "max-md:h-50", "ml-auto", "mr-auto", "mb-20", "relative", styles.sliders])}>
+        <div className={clsx(["max-w-640", "h-180", "max-lg:h-90", "max-md:h-50", "mb-20", "relative", styles.sliders])}>
           <div className={clsx(["relative", "w-full", "h-full", "z-1", styles.banners])}>
             {banners.map((item: IBanner, idx: number) => {
               return (
@@ -485,7 +485,7 @@ const Home = () => {
       )}
       <div className={clsx(["pl-4", "pr-4", "pb-20"])}>
         {animals.length > 0 && (
-          <div className={clsx(["max-w-470", "grid", "grid-cols-5", "max-lg:grid-cols-3", "max-md:grid-cols-2", "justify-center", styles.animals])} ref={animalsRef}>
+          <div className={clsx(["max-w-470", "grid", "ml-auto", "mr-auto", "grid-cols-5", "max-lg:grid-cols-3", "max-md:grid-cols-2", "justify-center", styles.animals])} ref={animalsRef}>
             {animals.map((item: IAnimal, idx: number) => {
               return (
                 <div key={`animal-${idx}`} className={clsx(["relative", "cursor-pointer", styles.item])}>
