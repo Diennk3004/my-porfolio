@@ -1,11 +1,7 @@
 "use client";
-import { UserProps } from "@/types";
+import { IJwtContext } from "@/types";
 import React from "react";
-type JwtContextType = {
-  isLoggedIn: boolean;
-  user: UserProps | null;
-};
-const JwtContext = React.createContext<JwtContextType>({
+const JwtContext = React.createContext<IJwtContext>({
   isLoggedIn: true,
   user: null
 });

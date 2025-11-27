@@ -465,7 +465,7 @@ const Home = () => {
             {banners.map((item: IBanner, idx: number) => {
               return (
                 <div key={`banner-slide-${idx}`} style={{ zIndex: item.active ? 99 : idx }} className={clsx(["absolute", "w-full", "h-full", "top-0", "left-0", styles.slide, item.active === true ? "opacity-100" : "opacity-0", item.active && directionSlider === "prev" && styles.activeSliderPrev, item.active && directionSlider === "next" && styles.activeSliderNext])}>
-                  <Image alt="Website" width={1700} height={717} src={`/${item.img}`} className={clsx(["w-full", "h-full"])} />
+                  <Image alt="Website" width={1700} height={717} src={`/${item.img}`} className={clsx(["h-full", "w-full", "ml-auto", "mr-auto"])} />
                   <div className={clsx(["absolute", "top-0", "left-0", "w-full", "h-full", "shadow-md", item.active && styles.mask])}></div>
                 </div>
               );
