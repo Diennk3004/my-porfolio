@@ -1,5 +1,5 @@
 import { JwtContext } from "@/context";
-import { useAppSelector } from "@/stores";
+import { useAppSelector } from "@/store";
 import React from "react";
 const JwtProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const { user, isLoggedIn } = useAppSelector((state) => state.account);
