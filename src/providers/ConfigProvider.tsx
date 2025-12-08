@@ -1,3 +1,4 @@
+"use client";
 import { ConfigContext } from "@/context";
 import React from "react";
 type IConfig = {
