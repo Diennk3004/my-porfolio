@@ -17,6 +17,7 @@
     "@hookform/resolvers": "^2.8.8",
     "@next/env": "^16.0.1",
     "@reduxjs/toolkit": "^2.10.1",
+    "axios": "^1.13.2",
     "clsx": "^2.1.1",
     "graphql": "^16.8.1",
     "immer": "^10.1.1",

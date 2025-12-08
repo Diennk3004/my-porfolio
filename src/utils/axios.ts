@@ -10,14 +10,14 @@ import { getCookie } from "./cookie";
 const AxiosService = () => {
   /* const dispatch = useAppDispatch(); */
   const itemAxios: any = {
-    baseURL: import.meta.env.VITE_BACKEND_URI as string,
+    baseURL: process.env.NEXT_PUBLIC_API_URL as string,
     timeout: 10000
   };
   const axiosServices = axios.create(itemAxios);
   let requestCount: number | 0 = 0;
   axiosServices.interceptors.request.use(
     (config: any) => {
-      const accessToken: string = getCookie(import.meta.env.VITE_ACCESS_TOKEN_PREFIX as string);
+      const accessToken: string = getCookie(process.env.NEXT_PUBLIC_ACCESS_TOKEN_PREFIX as string);
       if (accessToken) {
         config.headers.Authorization = `Bearer ${accessToken}`;
       }
@@ -55,7 +55,7 @@ const AxiosService = () => {
         } */
       }
       if (err.response?.status === 401) {
-        document.cookie = `${import.meta.env.VITE_ACCESS_TOKEN_PREFIX as string}=token; expires=${getExpired(-100)}; path=/;`;
+        document.cookie = `${process.env.NEXT_PUBLIC_ACCESS_TOKEN_PREFIX as string}=token; expires=${getExpired(-100)}; path=/;`;
       }
       return Promise.reject(err.response);
     }
