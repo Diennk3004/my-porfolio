@@ -6,4 +6,4 @@ type IUser = {
   locale: string;
   token: string;
 };
-export type { IUser };
+export { type IUser };

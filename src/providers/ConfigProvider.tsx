@@ -1,4 +1,3 @@
-"use client";
 import { ConfigContext } from "@/context";
 import React from "react";
 type IConfig = {
@@ -24,7 +23,7 @@ const ConfigProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
     };
     init();
   }, []);
-  return <ConfigContext value={{ ...config, onChangeLocale }}>{children}</ConfigContext>;
+  return <ConfigContext.Provider value={{ ...config, onChangeLocale }}>{children}</ConfigContext.Provider>;
 };
 
 export { ConfigProvider };

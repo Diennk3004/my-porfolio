@@ -1,5 +1,5 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { IUser } from "@/types";
+import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { type IUser } from "@/types";
 interface IProps {
   isLoggedIn: boolean;
   user: IUser | null;
