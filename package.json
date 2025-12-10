@@ -6,7 +6,6 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "start:production:local": "dotenvx run -f .env.production.local -- next start",
     "start:production": "dotenvx run -f .env.production -- next start",
     "lint": "next lint"
   },
