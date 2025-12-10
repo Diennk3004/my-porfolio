@@ -5,7 +5,7 @@ const ExampleTest = () => {
   return (
     <React.Fragment>
       <div className={clsx(["h-screen", "bg-linear-to-br", "from-sky-900", "to-sky-400", "flex", "justify-center", "items-center", "pl-3", "pr-3"])}>
-        <div className={clsx(["max-w-4xl", "bg-white", "rounded-md", "h-200", "pl-5", "pr-5", "pt-8", "pb-8"])}>
+        <div className={clsx(["max-w-4xl", "bg-white", "rounded-md", "pl-5", "pr-5", "pt-5", "pb-5"])}>
           <div>
             <div>
               <strong>Fullname:</strong>&nbsp;NGUYỄN KIM ĐIỀN
@@ -14,7 +14,7 @@ const ExampleTest = () => {
               <strong>Position:</strong>&nbsp;FULLSTACK DEVELOPER
             </div>
             <div>
-              <strong>Example test:</strong>&nbsp;PERMISSION MANAGEMENT
+              <strong>Example test:</strong>&nbsp;ROLE MANAGEMENT
             </div>
             <div>
               <strong>Techstack:</strong>&nbsp;React + Laravel
