@@ -20,7 +20,7 @@ const ExampleTest = () => {
               <strong>Techstack:</strong>&nbsp;React + Laravel
             </div>
             <div>
-              <strong>Source code:</strong>&nbsp;https://github.com/Diennk3004/MyTiximax
+              <strong>Source code:</strong>&nbsp;<span className={clsx(["text-red-500"])}>https://github.com/Diennk3004/MyTiximax</span>
             </div>
           </div>
           <div>
@@ -30,9 +30,7 @@ const ExampleTest = () => {
             <div className={clsx(["mt-8"])}>
               <strong>Step2:</strong>&nbsp;Run command line below
             </div>
-            <div className={clsx(["mt-2"])}>
-              <blockquote>docker compose -p env_production_my_tiximax down && docker image prune -a -f && docker builder prune -a -f && docker compose -p env_production_my_tiximax -f docker-compose.env.production.yaml up -d && docker exec postgres_env_production_tiximax sh -c "psql -U root -tc \"select 1 from pg_database where datname='tiximax'\" | grep -q 1 || psql -U root -c \"create database tiximax\"" && docker exec postgres_env_production_tiximax sh -c "psql -h 0.0.0.0 -p 5432 -U root -d tiximax &lt; ./DatabaseBackup/tiximax-20251211-00h23.tar.gz"</blockquote>
-            </div>
+            <div className={clsx(["mt-2", "bg-green-100", "border", "border-green-400", "pl-3", "pr-3", "pt-2", "pb-2", "rounded-md"])}>docker compose -p env_production_my_tiximax down && docker image prune -a -f && docker builder prune -a -f && docker compose -p env_production_my_tiximax -f docker-compose.env.production.yaml up -d</div>
             <div className={clsx(["mt-8"])}>
               <strong>Step3:</strong>&nbsp;Access http://localhost:2512
             </div>
