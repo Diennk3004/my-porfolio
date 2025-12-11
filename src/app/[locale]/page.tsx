@@ -20,12 +20,12 @@ const ExampleTest = () => {
               <strong>Techstack:</strong>&nbsp;React + Laravel
             </div>
             <div>
-              <strong>Source code:</strong>&nbsp;<span className={clsx(["text-red-500"])}>https://github.com/Diennk3004/MyTiximax</span>
+              <strong>Source code:</strong>&nbsp;<span className={clsx(["text-red-500"])}>https://github.com/Diennk3004/my-tiximax</span>
             </div>
           </div>
           <div>
             <div className={clsx(["mt-8"])}>
-              <strong>Step1:</strong>&nbsp;git clone git@github.com:Diennk3004/MyTiximax.git
+              <strong>Step1:</strong>&nbsp;git clone git@github.com:Diennk3004/my-tiximax.git
             </div>
             <div className={clsx(["mt-8"])}>
               <strong>Step2:</strong>&nbsp;Run command line below
