@@ -40,7 +40,7 @@ const ExampleTest = () => {
             <div className={clsx(["mt-2"])}>
               <div>User1: diennk - 246357</div>
               <div>User2: hongnt - 246357</div>
-              <div>User3: dungtd - 246357</div>
+              <div>User3: dungdt - 246357</div>
             </div>
           </div>
         </div>
