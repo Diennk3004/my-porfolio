@@ -511,6 +511,20 @@ const Home = () => {
           </div>
         )}
       </div>
+      {/* <div className={clsx(["pl-4", "pr-4", "pb-20"])}>
+        <div className={clsx(["w-200", "ml-auto", "mr-auto", "overflow-y-hidden", "overflow-x-scroll"])}>
+          <div className={clsx(["w-50", "h-50", "bg-amber-300", "float-left"])}></div>
+          <div className={clsx(["w-50", "h-50", "bg-amber-300", "float-left"])}></div>
+          <div className={clsx(["w-50", "h-50", "bg-amber-300", "float-left"])}></div>
+          <div className={clsx(["w-50", "h-50", "bg-amber-300", "float-left"])}></div>
+          <div className={clsx(["w-50", "h-50", "bg-amber-300", "float-left"])}></div>
+          <div className={clsx(["w-50", "h-50", "bg-amber-300", "float-left"])}></div>
+          <div className={clsx(["w-50", "h-50", "bg-amber-300", "float-left"])}></div>
+          <div className={clsx(["w-50", "h-50", "bg-amber-300", "float-left"])}></div>
+          <div className={clsx(["w-50", "h-50", "bg-amber-300", "float-left"])}></div>
+          <div className={clsx(["w-50", "h-50", "bg-amber-300", "float-left"])}></div>
+        </div>
+      </div> */}
       <button className={clsx(["fixed", "bottom-10", "right-20", "text-white", "bg-sky-600", "w-10", "h-10", "rounded-3xl", "cursor-pointer"])} onClick={handleScrollTop}>
         <ArrowUpOutlined />
       </button>
